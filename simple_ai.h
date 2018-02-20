@@ -1,11 +1,13 @@
 #ifndef SIMPLEAI_H
 #define SIMPLEAI_H
+
+
 namespace simpleai {
-    namespace state{
-        class State;
-    }
-    void Initialise();
-    simpleai::state::State* CalculateMove();
+    class State;
+
+    void initialise();
+    void learn(State& initialState);
+    State& useInstruction(State& currentState); 
 }
 #endif
 
