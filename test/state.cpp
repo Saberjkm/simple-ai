@@ -35,6 +35,14 @@ SCENARIO( "STATE", "[state]" ) {
         testState.remove("test");
         REQUIRE (testState.size() == 0);
     }
-
+    
+    WHEN("Getting a value") {
+        testState.add("test", 1);
+        int testInt = testState.get<int>("test");
+        REQUIRE (testInt == 1);
+        testInt = 2;
+        int testIntTwo = testState.get<int>("test");
+        REQUIRE (testIntTwo == 1);
+    }
     // Testing invalid
 }

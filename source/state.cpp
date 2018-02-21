@@ -42,4 +42,13 @@ namespace simpleai {
             data.erase(key);
         }
     }
+
+    template<typename T> T State::get(std::string key) {
+        auto search = this->data.find(key);
+        if (search == this->data.end()) {
+            throw std::invalid_argument("Key doesn't exist in this state"); 
+        } else {
+            return (T(std::any_cast<T>(search->second)));
+        }
+    }
 }

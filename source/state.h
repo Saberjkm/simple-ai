@@ -13,10 +13,10 @@ namespace simpleai {
             const int size() { return data.size(); };
             const bool has(std::string key ) { return (data.count(key) > 0); };
 
-            template<typename T> void add(std::string key, T value);
-            template<typename T> void replace(std::string key, T value);
-            void remove(std::string key);
-            template<typename T> T& get(std::string key);
+            template<typename T> void add(std::string key, T value); // Adds a key, value pair to the state
+            template<typename T> void replace(std::string key, T value); // Replaces a value associated with the key with a given value
+            void remove(std::string key); // Removes a value with the associated key
+            template<typename T> T get(std::string key); // Returns a copy of the value with associated key, use replace to alter that value
     };
 }
 #endif
