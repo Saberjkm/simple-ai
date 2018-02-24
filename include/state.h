@@ -17,6 +17,7 @@ namespace simpleai {
             template<typename T> void replace(std::string key, T value); // Replaces a value associated with the key with a given value
             void remove(std::string key); // Removes a value with the associated key
             template<typename T> T get(std::string key); // Returns a copy of the value with associated key, use replace to alter that value
+            std::map<std::string,std::type_info> getKeyTypes(); // Returns a map of the keys and type id's
     };
 }
 #endif

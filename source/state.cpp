@@ -13,8 +13,7 @@ namespace simpleai {
         auto search = this->data.find(key);
         if (search == this->data.end()){
             std::any convertedValue(value);
-            //convertedValue.emplace(value);
-            this->data.insert({key, convertedValue});
+            this->data.insert(std::make_pair(key, convertedValue));
         } else {
             // Rather than using an option to 'do nothing' with an already existing key insert or returning a bool
             // I use this to clearly tell the programmer that you shouldnt be doing this
@@ -49,6 +48,19 @@ namespace simpleai {
             throw std::invalid_argument("Key doesn't exist in this state"); 
         } else {
             return (T(std::any_cast<T>(search->second)));
+        }
+    }
+
+    std::map<std::string, std::type_info> State::getKeyTypes() {
+        if (this->size() == 0) {
+            throw std::logic_error("There are no keys in this state");   
+        } else {
+            std::map<std::string, std::type_info> returnMap;
+            for (auto item = this->data.begin(); item != this->data.end(); ++item) {
+                std::string key = std::string(item->first);
+                std::type_info typeData = item->second.type();
+            }
+            return returnMap;
         }
     }
 }

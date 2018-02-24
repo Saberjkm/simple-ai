@@ -45,4 +45,13 @@ SCENARIO( "STATE", "[state]" ) {
         REQUIRE (testIntTwo == 1);
     }
     // Testing invalid
+    WHEN("Adding a duplicate key") {
+        testState.add("test",1);
+        CHECK_THROWS_WITH(testState.add("test", 2), "Key already exists in this state");
+        REQUIRE (testState.size() == 1);
+    }
+
+    WHEN("Replacing non-existing item") {
+        CHECK_THROWS_WITH(testState.replace("test", 1), "Key doesn't exist in this state");
+    }
 }
