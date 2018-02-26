@@ -3,6 +3,7 @@
 #include <exception>
 #include <any>
 #include <map>
+#include <functional>
 
 #include "state.h"
 
@@ -51,14 +52,15 @@ namespace simpleai {
         }
     }
 
-    std::map<std::string, std::type_info> State::getKeyTypes() {
+    std::map<std::string, const std::type_info*> State::getKeyTypes() {
         if (this->size() == 0) {
             throw std::logic_error("There are no keys in this state");   
         } else {
-            std::map<std::string, std::type_info> returnMap;
+            std::map<std::string, const std::type_info*> returnMap;
             for (auto item = this->data.begin(); item != this->data.end(); ++item) {
                 std::string key = std::string(item->first);
-                std::type_info typeData = item->second.type();
+                const std::type_info* typeData = &item->second.type();
+                returnMap.insert(std::make_pair(key, typeData));
             }
             return returnMap;
         }
