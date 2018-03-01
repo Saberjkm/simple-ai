@@ -2,8 +2,8 @@
 #include <variant>
 #include <string>
 
-#include "simple_ai.h"
-#include "state.h"
+#include "simple_ai.hpp"
+#include "state.hpp"
 
 void simpleai::initialise() {
     std::cout << "Initialised" << std::endl;
@@ -11,5 +11,5 @@ void simpleai::initialise() {
 
 int main() {
     simpleai::State testState;
-    testState.add<int>(std::string("one"), 5);
+    testState.add("first", 5);
 }

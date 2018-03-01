@@ -2,7 +2,7 @@
 #include <string>
 
 #include "catch.hpp"
-#include "state.h"
+#include "state.hpp"
 
 SCENARIO( "STATE", "[state]" ) {
     simpleai::State testState;
