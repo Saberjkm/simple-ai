@@ -1,6 +1,8 @@
 #include <iostream>
 #include <variant>
 #include <string>
+#include <map>
+#include <functional>
 
 #include "simple_ai.hpp"
 #include "state.hpp"
@@ -10,6 +12,5 @@ void simpleai::initialise() {
 }
 
 int main() {
-    simpleai::State testState;
-    testState.add("first", 5);
+
 }

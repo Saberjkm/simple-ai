@@ -1,5 +1,6 @@
 //TESTING OF STATE
 #include <string>
+#include <typeinfo>
 
 #include "catch.hpp"
 #include "state.hpp"
@@ -44,6 +45,18 @@ SCENARIO( "STATE", "[state]" ) {
         int testIntTwo = testState.get<int>("test");
         REQUIRE (testIntTwo == 1);
     }
+
+	WHEN("Getting a list of key types") {
+		testState.add("one", 1);
+		testState.add("two", 'c');
+		testState.add("three", 5.4);
+		auto testMap = testState.getKeyTypes();
+		for (auto item = testMap.begin(); item != testMap.end(); ++item) {
+			if (item->first == "one") { REQUIRE (*item->second == typeid(int) ); }
+			if (item->first == "two") { REQUIRE (*item->second == typeid(char) ); }
+			if (item->first == "three") { REQUIRE (*item->second == typeid(double) ); }
+		} 
+	}
     // Testing invalid
     WHEN("Adding a duplicate key") {
         testState.add("test",1);
