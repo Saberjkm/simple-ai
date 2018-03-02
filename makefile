@@ -1,17 +1,18 @@
-CC=g++-7
-STD=-std=c++17
-IFLAGS=-Iinclude
+CC := g++-7
+STD := -std=c++17
+IFLAGS := -Iinclude
+OBJ_DIR := obj
+SRC_DIR := source
+SRC_FILES := $(wildcard $(SRC_DIR)/*.cpp)
+OBJ_FILES := $(patsubst $(SRC_DIR)/%.cpp,$(OBJ_DIR)/%.o,$(SRC_FILES))
 
 all: run
 
-run: simple_ai.o state.o
-	$(CC) $(STD) simple_ai.o state.o -o run
+run: $(OBJ_FILES)
+	$(CC) $(STD) -o $@ $^
 
-simple_ai.o: source/simple_ai.cpp
-	$(CC) $(STD) $(IFLAGS) -c source/simple_ai.cpp
-
-state.o: source/state.cpp
-	$(CC) $(STD) $(IFLAGS) -c source/state.cpp
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
+	$(CC) $(STD) $(IFLAGS) -c -o $@ $< 
 
 test: test_main.o test_state.o state.o
 	$(CC) $(STD) test.o test_state.o state.o -o run_test

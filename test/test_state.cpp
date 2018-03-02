@@ -46,6 +46,12 @@ SCENARIO( "STATE", "[state]" ) {
         REQUIRE (testIntTwo == 1);
     }
 
+	WHEN("Getting a changed value") {
+		testState.add("test", 5.4);
+		testState.replace("test", 'c');
+		REQUIRE_NOTHROW(testState.get<char>("test"));
+	}
+
 	WHEN("Getting a list of key types") {
 		testState.add("one", 1);
 		testState.add("two", 'c');
@@ -57,6 +63,7 @@ SCENARIO( "STATE", "[state]" ) {
 			if (item->first == "three") { REQUIRE (*item->second == typeid(double) ); }
 		} 
 	}
+
     // Testing invalid
     WHEN("Adding a duplicate key") {
         testState.add("test",1);
@@ -64,7 +71,19 @@ SCENARIO( "STATE", "[state]" ) {
         REQUIRE (testState.size() == 1);
     }
 
-    WHEN("Replacing non-existing item") {
+    WHEN("Replacing non-existant item") {
         CHECK_THROWS_WITH(testState.replace("test", 1), "Key doesn't exist in this state");
     }
+
+	WHEN("Getting non-existant value") {
+		CHECK_THROWS_WITH(testState.get<int>("test"), "Key doesn't exist in this state");
+	}
+
+	WHEN("Removing non-existant item") {
+		CHECK_THROWS_WITH(testState.remove("test"), "Key doesn't exist in this state");
+	}
+
+	WHEN("Getting key types from empty state") {
+		CHECK_THROWS_WITH(testState.getKeyTypes(), "There are no keys in this state");
+	}
 }

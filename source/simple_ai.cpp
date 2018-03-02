@@ -8,7 +8,7 @@
 #include "state.hpp"
 
 void simpleai::initialise() {
-    std::cout << "Initialised" << std::endl;
+    std::cout << "Initialised method" << std::endl;
 }
 
 int main() {
