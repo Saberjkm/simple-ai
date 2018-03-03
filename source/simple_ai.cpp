@@ -10,7 +10,3 @@
 void simpleai::initialise() {
     std::cout << "Initialised method" << std::endl;
 }
-
-int main() {
-
-}
