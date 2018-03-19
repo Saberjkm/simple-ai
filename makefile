@@ -10,7 +10,7 @@ OBJ_FILES := $(patsubst $(SRC_DIR)/%.cpp,$(OBJ_DIR)/%.o,$(SRC_FILES))
 
 all: $(OBJ_FILES)
 
-test: test_run
+test: run_test
 
 run_test: $(OBJ_FILES) $(patsubst $(TEST_DIR)/%.cpp,$(OBJ_DIR)/%.o,$(wildcard $(TEST_DIR)/*.cpp))
 	$(CC) $(STD) -o $@ $^

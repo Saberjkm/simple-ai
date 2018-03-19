@@ -6,15 +6,18 @@
 #include <exception>
 #include <any>
 #include <map>
+#include <vector>
 #include <functional>
 
 namespace simpleai {
     class State {
         private:
             std::map<std::string, std::any> data;
+			static std::vector<std::string> instructionSet; // List of all avaliable instructions for the state
         public:
             const int size() { return data.size(); };
-            const bool has(std::string key ) { return (data.count(key) > 0); };
+            const bool has(std::string key) { return (data.count(key) > 0); };
+			static const void setInstructions(std::vector<std::string> instructions) { instructionSet = std::move(instructions); }
 
 			// Adds a key, value pair to the state
             template<typename T> void add(const std::string& key, T value) {
@@ -53,6 +56,7 @@ namespace simpleai {
 
 			void remove(std::string key); // Removes a value with the associated key
             std::map<std::string, const std::type_info*> getKeyTypes(); // Returns a map of the keys and type id's
+			State applyInstruction(State originalState, std::string instruction); // Applys an instruction to a given state:
     };
 }
 #endif
