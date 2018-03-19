@@ -8,7 +8,8 @@
 #include "state.hpp"
 
 namespace simpleai {
-    
+	std::vector<std::string> State::instructionSet = {};
+
     void State::remove(std::string key) {
         auto search = this->data.find(key);
         if (search == this->data.end()) {
