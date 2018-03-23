@@ -7,7 +7,7 @@
 
 SCENARIO( "STATE", "[state]" ) {
     simpleai::State testState;
-    
+
     REQUIRE (testState.size() == 0);
 
     // Testing valid
@@ -36,7 +36,7 @@ SCENARIO( "STATE", "[state]" ) {
         testState.remove("test");
         REQUIRE (testState.size() == 0);
     }
-    
+
     WHEN("Getting a value") {
         testState.add("test", 1);
         int testInt = testState.get<int>("test");
@@ -46,23 +46,23 @@ SCENARIO( "STATE", "[state]" ) {
         REQUIRE (testIntTwo == 1);
     }
 
-	WHEN("Getting a changed value") {
-		testState.add("test", 5.4);
-		testState.replace("test", 'c');
-		REQUIRE_NOTHROW(testState.get<char>("test"));
-	}
+    WHEN("Getting a changed value") {
+        testState.add("test", 5.4);
+        testState.replace("test", 'c');
+        REQUIRE_NOTHROW(testState.get<char>("test"));
+    }
 
-	WHEN("Getting a list of key types") {
-		testState.add("one", 1);
-		testState.add("two", 'c');
-		testState.add("three", 5.4);
-		auto testMap = testState.getKeyTypes();
-		for (auto item = testMap.begin(); item != testMap.end(); ++item) {
-			if (item->first == "one") { REQUIRE (*item->second == typeid(int) ); }
-			if (item->first == "two") { REQUIRE (*item->second == typeid(char) ); }
-			if (item->first == "three") { REQUIRE (*item->second == typeid(double) ); }
-		} 
-	}
+    WHEN("Getting a list of key types") {
+        testState.add("one", 1);
+        testState.add("two", 'c');
+        testState.add("three", 5.4);
+        auto testMap = testState.getKeyTypes();
+        for (auto item = testMap.begin(); item != testMap.end(); ++item) {
+            if (item->first == "one") { REQUIRE (*item->second == typeid(int) ); }
+            if (item->first == "two") { REQUIRE (*item->second == typeid(char) ); }
+            if (item->first == "three") { REQUIRE (*item->second == typeid(double) ); }
+        }
+    }
 
     // Testing invalid
     WHEN("Adding a duplicate key") {
@@ -75,15 +75,15 @@ SCENARIO( "STATE", "[state]" ) {
         CHECK_THROWS_WITH(testState.replace("test", 1), "Key doesn't exist in this state");
     }
 
-	WHEN("Getting non-existant value") {
-		CHECK_THROWS_WITH(testState.get<int>("test"), "Key doesn't exist in this state");
-	}
+    WHEN("Getting non-existant value") {
+        CHECK_THROWS_WITH(testState.get<int>("test"), "Key doesn't exist in this state");
+    }
 
-	WHEN("Removing non-existant item") {
-		CHECK_THROWS_WITH(testState.remove("test"), "Key doesn't exist in this state");
-	}
+    WHEN("Removing non-existant item") {
+        CHECK_THROWS_WITH(testState.remove("test"), "Key doesn't exist in this state");
+    }
 
-	WHEN("Getting key types from empty state") {
-		CHECK_THROWS_WITH(testState.getKeyTypes(), "There are no keys in this state");
-	}
+    WHEN("Getting key types from empty state") {
+        CHECK_THROWS_WITH(testState.getKeyTypes(), "There are no keys in this state");
+    }
 }
